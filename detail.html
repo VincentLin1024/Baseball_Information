@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>球隊介紹 | 世界棒球地圖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="data.js"></script>
+<style>
+  html, body { margin:0; padding:0; background:#080c14; }
+  * { box-sizing:border-box; }
+  body { font-family:'Noto Sans TC',system-ui,sans-serif; color:#e7edf5; }
+  a { color:#7fd4ff; text-decoration:none; }
+  a:hover { color:#b7e8ff; }
+  .wrap { max-width:840px; margin:0 auto; padding:0 24px 80px; }
+  .back-link { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:#8b9ab0; padding:20px 0; }
+  .hero { border-radius:18px; padding:40px 32px; margin-bottom:32px; position:relative; overflow:hidden; }
+  .hero-en { font-family:'Barlow Condensed',sans-serif; font-size:14px; letter-spacing:.28em; text-transform:uppercase; opacity:.85; }
+  .hero-name { font-size:34px; font-weight:900; margin-top:6px; letter-spacing:.02em; }
+  .hero-city { font-size:14px; margin-top:10px; opacity:.85; }
+  .stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:36px; }
+  .stat-box { background:#141d2c; border:1px solid #1f2b3e; border-radius:12px; padding:16px 18px; }
+  .stat-label { font-size:11px; letter-spacing:.14em; color:#6f8098; text-transform:uppercase; }
+  .stat-value { font-size:17px; font-weight:700; margin-top:6px; }
+  .section-title { font-size:12px; letter-spacing:.16em; color:#6f8098; text-transform:uppercase; margin:36px 0 14px; display:flex; align-items:center; gap:10px; }
+  .section-title::after { content:""; flex:1; height:1px; background:#1f2b3e; }
+  .history-text { font-size:15px; color:#b7c2d6; line-height:2; background:#0f1622; border:1px solid #1f2b3e; border-radius:14px; padding:20px 22px; }
+  .star-card { display:flex; gap:16px; align-items:baseline; padding:16px 18px; background:#131b28; border-left:4px solid #7fd4ff; border-radius:0 12px 12px 0; margin-bottom:12px; }
+  .star-name { font-weight:700; font-size:17px; flex:none; }
+  .star-note { font-size:14px; color:#9aa9bf; line-height:1.6; }
+  .video-frame { position:relative; width:100%; aspect-ratio:16/9; border-radius:14px; overflow:hidden; background:#000; }
+  .video-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .no-video { position:relative; width:100%; aspect-ratio:16/9; border-radius:14px; border:1px dashed #2c3c55; background:repeating-linear-gradient(45deg,#111a27 0px,#111a27 9px,#0e1621 9px,#0e1621 18px); display:flex; align-items:center; justify-content:center; color:#6b7b93; font-size:13px; }
+  .disclaimer { margin-top:40px; font-size:12px; color:#5d6b80; text-align:center; }
+  .not-found { padding:80px 20px; text-align:center; color:#8b9ab0; }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <div class="not-found">載入中...</div>
+</div>
+
+<script>
+function escapeHtml(str) {
+  return String(str ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+const params = new URLSearchParams(window.location.search);
+const leagueId = params.get("league");
+const teamId = params.get("team");
+
+const wrap = document.getElementById("wrap");
+const league = data[leagueId];
+const team = league ? league.teams.find(t => t.id === teamId) : null;
+
+if (!team) {
+  wrap.innerHTML =
+    '<div class="not-found">' +
+      '<div style="font-size:20px;font-weight:700;margin-bottom:10px;">找不到這支球隊</div>' +
+      '<div style="font-size:13px;">網址參數可能不正確，請從地圖頁重新點選球隊。</div>' +
+      '<a href="index.html" style="display:inline-block;margin-top:20px;">← 回到地圖首頁</a>' +
+    '</div>';
+} else {
+  document.title = team.name + " | 世界棒球地圖";
+
+  const starsHtml = (team.stars || []).map(s =>
+    '<div class="star-card" style="border-left-color:' + team.color + ';">' +
+      '<div class="star-name">' + escapeHtml(s.name) + '</div>' +
+      '<div class="star-note">' + escapeHtml(s.note) + '</div>' +
+    '</div>'
+  ).join("");
+
+  const historyHtml = team.history
+    ? '<div class="section-title">球隊沿革</div><div class="history-text">' + escapeHtml(team.history) + '</div>'
+    : "";
+
+  const videoHtml = team.videoId
+    ? '<div class="video-frame"><iframe src="https://www.youtube.com/embed/' + team.videoId + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+    : '<div class="no-video">尚未提供影片</div>';
+
+  wrap.innerHTML =
+    '<a class="back-link" href="index.html">← 回到地圖首頁</a>' +
+    '<div class="hero" style="background:linear-gradient(135deg,' + team.color + '33,transparent 60%),#0f1622;border:1px solid #1f2b3e;">' +
+      '<div class="hero-en">' + escapeHtml(team.en) + '</div>' +
+      '<div class="hero-name">' + escapeHtml(team.name) + '</div>' +
+      '<div class="hero-city">📍 ' + escapeHtml(team.city) + '</div>' +
+    '</div>' +
+    '<div class="stat-grid">' +
+      '<div class="stat-box"><div class="stat-label">Stadium</div><div class="stat-value">' + escapeHtml(team.stadium) + '</div></div>' +
+      '<div class="stat-box"><div class="stat-label">Titles</div><div class="stat-value">' + escapeHtml(team.titles) + '</div></div>' +
+      '<div class="stat-box"><div class="stat-label">League</div><div class="stat-value">' + escapeHtml(league.label) + '</div></div>' +
+    '</div>' +
+    historyHtml +
+    '<div class="section-title">代表球星</div>' +
+    starsHtml +
+    '<div class="section-title">冠軍精華 / 經典時刻</div>' +
+    videoHtml +
+    '<div class="disclaimer">※ 本頁球場、冠軍次數與球星資料為示範內容，正式使用前請核實。</div>';
+}
+</script>
+</body>
+</html>
