@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="data.js"></script>
 <style>
   html, body { margin:0; padding:0; height:100%; background:#080c14; }
   * { box-sizing:border-box; }
@@ -54,108 +55,6 @@
 // ============ 資料 ============
 const accent = "#e7edf5";
 const markerSize = 11;
-
-const data = {
-  MLB: {
-    label: "美國大聯盟", view: [[39.5, -98.3], 4],
-    teams: [
-      { id:"nyy", name:"紐約洋基", en:"New York Yankees", city:"紐約 布朗克斯", stadium:"Yankee Stadium 洋基球場", titles:"世界大賽 27 次（待核實）", color:"#2b4a7d", ll:[40.8296,-73.9262],
-        stars:[{name:"Babe Ruth",note:"改寫棒球長打時代的傳奇強打（待核實）"},{name:"Derek Jeter",note:"隊長，生涯效力洋基 20 季（待核實）"},{name:"Mariano Rivera",note:"史上救援成功數最多的終結者（待核實）"}] },
-      { id:"bos", name:"波士頓紅襪", en:"Boston Red Sox", city:"波士頓", stadium:"Fenway Park 芬威球場", titles:"世界大賽 9 次（待核實）", color:"#BD3039", ll:[42.3467,-71.0972],
-        stars:[{name:"Ted Williams",note:"最後一位單季四成打者（待核實）"},{name:"David Ortiz",note:"關鍵時刻的季後賽大棒（待核實）"}] },
-      { id:"lad", name:"洛杉磯道奇", en:"Los Angeles Dodgers", city:"洛杉磯", stadium:"Dodger Stadium 道奇球場", titles:"世界大賽 7 次（待核實）", color:"#1f6fc4", ll:[34.0739,-118.2400],
-        stars:[{name:"Jackie Robinson",note:"打破膚色藩籬的先驅（待核實）"},{name:"Sandy Koufax",note:"1960 年代最具宰制力的左投（待核實）"},{name:"Clayton Kershaw",note:"三座賽揚獎的隊史王牌（待核實）"}] },
-      { id:"sf", name:"舊金山巨人", en:"San Francisco Giants", city:"舊金山", stadium:"Oracle Park", titles:"世界大賽 8 次（待核實）", color:"#FD5A1E", ll:[37.7786,-122.3893],
-        stars:[{name:"Willie Mays",note:"攻守兼具的中外野典範（待核實）"},{name:"Barry Bonds",note:"生涯全壘打紀錄保持者（待核實）"}] },
-      { id:"chc", name:"芝加哥小熊", en:"Chicago Cubs", city:"芝加哥", stadium:"Wrigley Field", titles:"世界大賽 3 次（待核實）", color:"#2a58a8", ll:[41.9484,-87.6553],
-        stars:[{name:"Ernie Banks",note:"人稱 Mr. Cub 的隊史象徵（待核實）"},{name:"Ryne Sandberg",note:"名人堂二壘手（待核實）"}] },
-      { id:"atl", name:"亞特蘭大勇士", en:"Atlanta Braves", city:"亞特蘭大", stadium:"Truist Park", titles:"世界大賽 4 次（待核實）", color:"#CE1141", ll:[33.8907,-84.4677],
-        stars:[{name:"Hank Aaron",note:"長年全壘打紀錄保持者（待核實）"},{name:"Greg Maddux",note:"控球藝術的代名詞（待核實）"}] }
-    ]
-  },
-  NPB: {
-    label: "日本職棒", view: [[35.6, 136.5], 5.4],
-    teams: [
-      { id:"yg", name:"讀賣巨人", en:"Yomiuri Giants", city:"東京都文京區", stadium:"東京巨蛋", titles:"日本一 22 次", color:"#F26F21", ll:[35.7056,139.7519],
-        history:"東京棒球隊（大日本東京棒球俱樂部，1934）→ 東京巨人隊（1936）→ 東京讀賣巨人隊（1947-）",
-        stars:[{name:"王貞治",note:"世界全壘打王，生涯868支全壘打"},{name:"長嶋茂雄",note:"昭和時代的國民球星"}],
-        videoId:"" },
-      { id:"ht", name:"阪神虎", en:"Hanshin Tigers", city:"兵庫縣西宮市", stadium:"阪神甲子園球場", titles:"日本一 2 次", color:"#F5C000", ll:[34.7211,135.3617],
-        history:"大阪虎隊（1935）→ 阪神軍隊（1940）→ 大阪虎隊（1947）→ 阪神虎隊（1961-）",
-        stars:[{name:"掛布雅之",note:"1985 年奪冠主砲"},{name:"藤川球兒",note:"以火球著稱的終結者"}],
-        videoId:"" },
-      { id:"sh", name:"福岡軟銀鷹", en:"Fukuoka SoftBank Hawks", city:"福岡縣福岡市", stadium:"瑞穗PayPay福岡巨蛋", titles:"日本一 12 次", color:"#F7B52C", ll:[33.5953,130.3622],
-        history:"南海隊（1938）→ 近畿日本隊（1944）→ 近畿大車輪隊（1946）→ 南海鷹隊（1947）→ 福岡大榮鷹隊（1989）→ 福岡軟銀鷹隊（2005-）",
-        stars:[{name:"松中信彥",note:"平成唯一打撃三冠王"},{name:"柳田悠岐",note:"2015在NPB達成333成就(打擊率3成、30轟、30盜)"}],
-        videoId:"ZQsP8SGv65Y" },
-      { id:"nf", name:"北海道日本火腿鬥士", en:"Hokkaido Nippon-Ham Fighters", city:"北海道北廣島市", stadium:"Es Con Field Hokkaido", titles:"日本一 3次", color:"#2f5fa8", ll:[42.9905,141.5492],
-        history:"參議員隊（1946）→ 東急飛人隊（1947）→ 急映飛人隊（1948）→ 東急飛人隊（1949）→ 東映飛人隊（1954）→ 日拓飛人隊（1973）→ 日本火腿鬥士隊（1974）→ 北海道日本火腿鬥士隊（2004-）",
-        stars:[{name:"大谷翔平",note:"百年一見的二刀流選手"},{name:"達比修有",note:"日本人在大聯盟累積勝投王"}],
-        videoId:"" },
-      { id:"ob", name:"歐力士猛牛", en:"Orix Buffaloes", city:"大阪府大阪市", stadium:"大阪京瓷巨蛋", titles:"日本一 5次", color:"#BAA834", ll:[34.6694,135.4765],
-        history:"阪急隊（1936）→ 阪急熊隊（1947）→ 阪急勇士隊（1947）→ 歐力士勇士隊（1989）→ 歐力士藍浪隊（1991）→ 歐力士猛牛隊（2005-，與大阪近鐵猛牛合併）",
-        stars:[{name:"山本由伸",note:"連續三年澤村賞得主"},{name:"鈴木一朗",note:"世界安打王，生涯總計4367支安打"}],
-        videoId:"" },
-      { id:"sl", name:"埼玉西武獅", en:"Saitama Seibu Lions", city:"埼玉縣所澤市", stadium:"西武巨蛋", titles:"日本一 13次", color:"#00214B", ll:[35.7686,139.4205],
-        history:"西鐵快艇隊（1950）→ 西鐵獅隊（1951，與西日本海盜隊合併時改名）→ 太平洋俱樂部獅隊（1973）→ 王冠打火機獅隊（1977）→ 西武獅隊（1979）→ 埼玉西武獅（2008-）",
-        stars:[{name:"松坂大輔",note:"平成怪物，首位在MLB世界大賽拿勝投的亞洲投手"},{name:"中村剛也",note:"西武隊史全壘打王"}],
-        videoId:"" },
-      { id:"cl", name:"千葉羅德海洋", en:"Chiba Lotte Marines", city:"千葉縣千葉市", stadium:"千葉海洋球場", titles:"日本一 4次", color:"#000000", ll:[35.6457,140.0311],
-        history:"每日獵戶星隊（1950）→ 大每獵戶星隊（1958，與大映聯合隊合併）→ 東京獵戶星隊（1964）→ 羅德獵戶星隊（1969）→ 千葉羅德海洋隊（1992-）",
-        stars:[{name:"初芝清",note:"平成的羅德先生"},{name:"落合博滿",note:"曾多次拿到球季的三冠王"}],
-        videoId:"" },
-      { id:"yd", name:"橫濱DeNA灣星", en:"Yokohama DeNA BayStars", city:"神奈川縣橫濱市", stadium:"橫濱球場", titles:"日本一 3次", color:"#003D80", ll:[35.4434,139.6408],
-        history:"大洋鯨隊（1950）→ 大洋松竹知更鳥隊（1953，與松竹知更鳥合併）→ 洋松知更鳥隊（1954）→ 大洋鯨隊（1955）→ 橫濱大洋鯨隊（1978）→ 橫濱灣星隊（1993）→ 橫濱DeNA灣星（2011-）",
-        stars:[{name:"筒香嘉智",note:"重炮型左打"},{name:"牧秀悟",note:"超級新人，2021年史上第一位新人完全打擊"}],
-        videoId:"" },
-      { id:"rg", name:"東北樂天金鷲", en:"Tohoku Rakuten Golden Eagles", city:"宮城縣仙台市", stadium:"宮城球場", titles:"日本一 1次", color:"#7D001A", ll:[38.2565,140.9029],
-        history:"2004年新成立（承接大阪近鐵猛牛部分資源，官方認定為全新球隊）→ 東北樂天金鷹（2005-）",
-        stars:[{name:"田中將大",note:"神之子，2013年創下24勝0敗的紀錄，並帶領樂天拿到2013年的日本一"},{name:"則本昂大",note:"連續 5 年奪三振王(2014-2018)"}],
-        videoId:"tHoLduh2ChM" },
-      { id:"ys", name:"東京養樂多燕子", en:"Tokyo Yakult Swallows", city:"東京都新宿區", stadium:"明治神宮球場", titles:"日本一 6次", color:"#001443", ll:[35.6746,139.7172],
-        history:"國鐵燕子隊（1950）→ 產經燕子隊（1965）→ 產經原子小金剛隊（1966）→ 原子小金剛隊（1969）→ 養樂多原子小金剛隊（1970）→ 養樂多燕子隊（1973）→ 東京養樂多燕子隊（2006-）",
-        stars:[{name:"古田敦也",note:"隊史最偉大捕手"},{name:"村上宗隆",note:"2022年打破日本本土球員單季最多轟紀錄(56轟)"}],
-        videoId:"" },
-      { id:"cd", name:"中日龍", en:"Chunichi Dragons", city:"愛知縣名古屋市", stadium:"名古屋巨蛋", titles:"日本一 2次", color:"#0C3282", ll:[35.1862,136.9473],
-        history:"名古屋隊（1936）→ 產業隊（1944）→ 中部日本隊（1946）→ 中部日本龍隊（1947）→ 中日龍隊（1948）→ 名古屋龍隊（1951）→ 中日龍隊（1954-）",
-        stars:[{name:"岩瀨仁紀",note:"日職歷史救援王"},{name:"立浪和義",note:"永遠的「龍之先生」"}],
-        videoId:"" },
-      { id:"tc", name:"廣島東洋鯉魚", en:"Hiroshima Toyo Carp", city:"廣島縣廣島市", stadium:"馬自達Zoom-Zoom廣島球場", titles:"日本一 3次", color:"#F92B20", ll:[34.3919,132.4846],
-        history:"廣島鯉魚隊（1950）→ 廣島東洋鯉魚隊（1968-）",
-        stars:[{name:"黑田博樹",note:"美日通算 200 勝"},{name:"新井貴浩",note:"2016 中央聯盟MVP"}],
-        videoId:"" }
-    ]
-  },
-  CPBL: {
-    label: "中華職棒", view: [[23.75, 120.95], 7.4],
-    teams: [
-      { id:"ctbc", name:"中信兄弟", en:"CTBC Brothers", city:"台中市", stadium:"台中洲際棒球場", titles:"總冠軍 10 次", color:"#FFD400", ll:[24.1958,120.6946],
-        history:"兄弟飯店棒球隊（1984）→ 兄弟象（1990）→ 中信兄弟（2014-）",
-        stars:[{name:"彭政閔",note:"恰恰，隊史代表性打者"},{name:"江坤宇",note:"阿坤，世界12強游擊手"}],
-        videoId:"IXfBm1cIkg8" },
-      { id:"uni", name:"統一7-ELEVEn獅", en:"Uni-President Lions", city:"台南市", stadium:"臺南亞太成棒主球場", titles:"總冠軍 10 次", color:"#F26A21", ll:[22.9876,120.2211],
-        history:"統一獅（1990）→ 統一7-ELEVEn獅（2008-）",
-        stars:[{name:"潘威倫",note:"嘟嘟，中華職棒勝投王"},{name:"陳傑憲",note:"四爺，世界12強MVP"}],
-        videoId:"ZPDkn2CcGzM" },
-      { id:"rakuten", name:"樂天桃猿", en:"Rakuten Monkeys", city:"桃園市", stadium:"樂天桃園棒球場", titles:"總冠軍 7 次", color:"#C8102E", ll:[25.0038,121.2470],
-        history:"第一金剛（2003）→ La New熊（2004）→ Lamigo桃猿（2011）→ 樂天桃猿（2020-）",
-        stars:[{name:"林泓育",note:"小胖，強打捕手"},{name:"王柏融",note:"大王，連續兩年4成打擊率"}],
-        videoId:"emVgQV6UyIM" },
-      { id:"fubon", name:"富邦悍將", en:"Fubon Guardians", city:"新北市", stadium:"新莊棒球場", titles:"總冠軍 3 次", color:"#2f5fa8", ll:[25.0455,121.4477],
-        history:"俊國建設棒球隊（1989）→ 俊國熊（1993）→ 興農熊（1996上）→ 興農牛（1996下-2012）→ 義大犀牛（2013）→ 富邦悍將（2017-）",
-        stars:[{name:"林益全",note:"神全，隊史安打王"},{name:"張育成",note:"2023 WBC小組賽MVP"}],
-        videoId:"K3YRXN01xsc" },
-      { id:"dragons", name:"味全龍", en:"Wei Chuan Dragons", city:"台北市", stadium:"天母棒球場", titles:"總冠軍 5 次", color:"#D22630", ll:[25.1173,121.5285],
-        history:"前身：味全龍（1990）→ 解散（1999）→ 重新加盟復隊（2019-）",
-        stars:[{name:"黃平洋",note:"早期龍隊招牌投手，金臂人"},{name:"徐若熙",note:"龍之子，2023年台灣大賽MVP"}],
-        videoId:"eJH2pfdWH8M" },
-      { id:"tsg", name:"台鋼雄鷹", en:"TSG Hawks", city:"高雄市", stadium:"澄清湖棒球場", titles:"總冠軍 0 次", color:"#00A181", ll:[22.6690,120.3630],
-        history:"台鋼雄鷹（2022年成立，2024年一軍出賽，沒有前身，全新球隊）",
-        stars:[{name:"吳念庭",note:"浣熊，前日職西武獅內野手"},{name:"魔鷹",note:"大哥，重炮型洋打者"}],
-        videoId:"" }
-    ]
-  }
-};
 
 // ============ 狀態 ============
 let leagueId = "MLB";
@@ -312,7 +211,13 @@ function renderPanel() {
             historyHtml +
             '<div style="font-size:11px;letter-spacing:.14em;color:#6f8098;text-transform:uppercase;margin:22px 0 10px;">代表球星</div>' +
             '<div style="display:flex;flex-direction:column;gap:10px;">' + starsHtml + '</div>' +
-            '<div style="margin-top:18px;font-size:11px;color:#5d6b80;">※ 球場、冠軍次數與球星資料為示範內容，待核實。</div>' +
+            '<div style="margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">' +
+              '<div style="font-size:11px;color:#5d6b80;">※ 球場、冠軍次數與球星資料為示範內容，待核實。</div>' +
+              '<a href="detail.html?league=' + encodeURIComponent(leagueId) + '&team=' + encodeURIComponent(t.id) + '" target="_blank" rel="noopener" ' +
+                'style="flex:none;display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:999px;background:' + teamColor + ';color:#0b1119;font-size:13px;font-weight:700;white-space:nowrap;">' +
+                '閱讀更多 →' +
+              '</a>' +
+            '</div>' +
           '</div>' +
           '<div style="min-width:0;">' +
             '<div style="font-size:11px;letter-spacing:.14em;color:#6f8098;text-transform:uppercase;margin-bottom:10px;">冠軍精華影片</div>' +
